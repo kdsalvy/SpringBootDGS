@@ -1,0 +1,6 @@
+dgs:
+  graphql:
+    extensions:
+      scalars:
+        time-dates:
+          enabled: true
