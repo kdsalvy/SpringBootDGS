@@ -9,33 +9,26 @@ import learn.kd.generated.schema.DgsConstants;
 import learn.kd.generated.schema.types.School;
 import learn.kd.generated.schema.types.Student;
 import learn.kd.graphql.loader.SchoolLoader;
+import learn.kd.graphql.service.StudentService;
 import org.dataloader.DataLoader;
+import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
-import java.util.stream.Collectors;
 
 @DgsComponent
 public class StudentsFetcher {
 
-    private static final List<Student> students;
+    private StudentService studentService;
 
-    static {
-        students = new ArrayList<>() {{
-            add(new Student("1", "StudentA", 12, new School("Sch2", null, null)));
-            add(new Student("2", "StudentB", 13, new School("Sch2", null, null)));
-            add(new Student("3", "StudentC", 10, new School("Sch1", null, null)));
-            add(new Student("4", "StudentD", 15, new School("Sch2", null, null)));
-            add(new Student("5", "StudentE", 11, new School("Sch1", null, null)));
-        }};
+    @Autowired
+    public StudentsFetcher(StudentService studentService) {
+        this.studentService = studentService;
     }
 
     @DgsQuery
     public List<Student> students(@InputArgument String nameFilter) {
-        return students.stream()
-                .filter(s -> nameFilter == null || s.getName().contains(nameFilter))
-                .collect(Collectors.toList());
+        return studentService.listAllStudentsWithFilter(nameFilter);
     }
 
     // Child Data fetchers :: Useful for cases where some property can take time to return

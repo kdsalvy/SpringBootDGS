@@ -36,7 +36,7 @@ dependencies {
 generateJava{
     schemaPaths = ["${projectDir}/src/main/resources/schema"] // List of directories containing schema files
     packageName = 'learn.kd.generated.schema' // The package name to use to generate sources
-    generateClient = false // Enable generating the type safe query API
+    generateClient = true // Enable generating the type safe query API
 }
 
 test {
