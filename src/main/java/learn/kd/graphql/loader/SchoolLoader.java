@@ -24,10 +24,17 @@ public class SchoolLoader implements MappedBatchLoader<String, School> {
         }};
     }
 
+    /**
+     * Loads a batch of schools by collecting all the ids for which fetcher was called
+     * in a single request
+     *
+     * @param ids
+     * @return CompletionStage containing a map of id to school
+     */
     @Override
     public CompletionStage<Map<String, School>> load(Set<String> ids) {
         return CompletableFuture.supplyAsync(() -> schools.stream()
-                .filter(s -> ids == null || ids.isEmpty() || ids.contains(s.getId()))
+                .filter(s -> ids.contains(s.getId()))
                 .collect(Collectors.toMap(School::getId, school -> school)));
     }
 }
