@@ -39,6 +39,6 @@ generateJava{
     generateClient = false // Enable generating the type safe query API
 }
 
-tasks.named('test') {
+test {
     useJUnitPlatform()
 }
