@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringBootWithDgsApplication {
+public class StudentServiceApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(SpringBootWithDgsApplication.class, args);
+        SpringApplication.run(StudentServiceApplication.class, args);
     }
 
 }
