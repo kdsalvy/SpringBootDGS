@@ -11,6 +11,7 @@ import learn.kd.generated.schema.client.StudentsProjectionRoot;
 import learn.kd.generated.schema.types.Student;
 import learn.kd.graphql.SpringBootWithDgsApplication;
 import learn.kd.graphql.service.StudentService;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,6 @@ import org.springframework.boot.test.mock.mockito.SpyBean;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = {SpringBootWithDgsApplication.class})
@@ -63,10 +62,10 @@ class StudentsFetcherTest {
                 studentListType
         );
 
-        assertThat(students).isNotNull();
-        assertThat(students).isNotEmpty();
+        Assertions.assertThat(students).isNotNull();
+        Assertions.assertThat(students).isNotEmpty();
 
-        students.stream().forEach(student -> assertThat(student.getSchool().getName()).isNotNull());
+        students.stream().forEach(student -> Assertions.assertThat(student.getSchool().getName()).isNotNull());
     }
 
     @Test
@@ -94,9 +93,9 @@ class StudentsFetcherTest {
                 studentListType);
 
 
-        assertThat(students).isNotNull();
-        assertThat(students).isNotEmpty();
-        assertThat(students).hasSize(1);
+        Assertions.assertThat(students).isNotNull();
+        Assertions.assertThat(students).isNotEmpty();
+        Assertions.assertThat(students).hasSize(1);
     }
 
     @Test
@@ -110,7 +109,7 @@ class StudentsFetcherTest {
         );
 
         ExecutionResult result = dgsQueryExecutor.execute(queryRequest.serialize());
-        assertThat(result.getErrors()).isNotEmpty();
-        assertThat(result.getErrors().get(0).getMessage()).isEqualTo("This is from custom Exception Handler");
+        Assertions.assertThat(result.getErrors()).isNotEmpty();
+        Assertions.assertThat(result.getErrors().get(0).getMessage()).isEqualTo("This is from custom Exception Handler");
     }
 }

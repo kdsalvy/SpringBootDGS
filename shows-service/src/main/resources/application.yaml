@@ -1,0 +1,13 @@
+dgs:
+  graphql:
+    extensions:
+      scalars:
+        time-dates:
+          enabled: true
+
+spring:
+  application:
+    name: shows-service
+
+server:
+  port: 4001
