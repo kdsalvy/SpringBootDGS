@@ -9,7 +9,7 @@ import graphql.ExecutionResult;
 import learn.kd.generated.schema.client.StudentsGraphQLQuery;
 import learn.kd.generated.schema.client.StudentsProjectionRoot;
 import learn.kd.generated.schema.types.Student;
-import learn.kd.graphql.StudentServiceApplication;
+import learn.kd.graphql.SchoolServiceApplication;
 import learn.kd.graphql.service.StudentService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -22,7 +22,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.List;
 
 @ExtendWith(SpringExtension.class)
-@SpringBootTest(classes = {StudentServiceApplication.class})
+@SpringBootTest(classes = {SchoolServiceApplication.class})
 class StudentsFetcherTest {
 
     public static final String STUDENT_A = "StudentA";
