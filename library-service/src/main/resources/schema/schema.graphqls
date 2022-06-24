@@ -1,0 +1,9 @@
+type Student @key(fields: "id") @extends {
+    id: ID @external
+    books: [Book]
+}
+
+type Book {
+    id: ID
+    title: String
+}

@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: library-service
+
+server:
+  port: 4002
