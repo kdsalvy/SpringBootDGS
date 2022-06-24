@@ -7,7 +7,7 @@ dgs:
 
 spring:
   application:
-    name: shows-service
+    name: school-service
 
 server:
   port: 4001

@@ -1,16 +1,20 @@
+directive @key(fields: ID!) repeatable on OBJECT | INTERFACE
+directive @extends on OBJECT | INTERFACE
+directive @external on FIELD_DEFINITION
+
 type Query {
     students(nameFilter: String): [Student]
 }
 
-type Student {
-    id: ID
+type Student @key(fields: "id") {
+    id: ID!
     name: String
     age: Int
     school: School
 }
 
 type School {
-    id: ID
+    id: ID!
     name: String
     address: String
 }
