@@ -1,3 +1,2 @@
 rootProject.name = 'graphql-dgs-framework'
-include 'school-service'
-include 'library-service'
+include 'library-service', 'school-service'
