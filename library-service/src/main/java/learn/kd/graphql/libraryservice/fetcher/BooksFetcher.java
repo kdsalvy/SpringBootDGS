@@ -7,31 +7,17 @@ import com.netflix.graphql.dgs.DgsEntityFetcher;
 import learn.kd.generated.schema.DgsConstants;
 import learn.kd.generated.schema.types.Book;
 import learn.kd.generated.schema.types.Student;
+import learn.kd.graphql.libraryservice.loader.BookLoader;
 import lombok.extern.slf4j.Slf4j;
+import org.dataloader.DataLoader;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 @Slf4j
 @DgsComponent
 public class BooksFetcher {
-
-    private Map<String, List<Book>> studentBookRegister;
-
-    public BooksFetcher() {
-        studentBookRegister = Map.of(
-                "1", List.of(
-                        Book.newBuilder().id("Book1").title("The Book of GraphQL - Part I").build(),
-                        Book.newBuilder().id("Book2").title("The Book of GraphQL - Part II").build()
-                ),
-                "2", List.of(
-                        new Book("Book3", "The Book of GraphQL - Part III"),
-                        new Book("Book4", "The Book of GraphQL - Part IV"),
-                        new Book("Book5", "The Book of GraphQL - Part V"),
-                        new Book("Book6", "The Book of GraphQL - Part VI")
-                )
-        );
-    }
 
     @DgsEntityFetcher(name = DgsConstants.STUDENT.TYPE_NAME)
     public Student student(Map<String, Object> values) {
@@ -39,8 +25,9 @@ public class BooksFetcher {
     }
 
     @DgsData(parentType = DgsConstants.STUDENT.TYPE_NAME)
-    public List<Book> books(DgsDataFetchingEnvironment dfe) {
+    public CompletableFuture<List<Book>> books(DgsDataFetchingEnvironment dfe) {
+        DataLoader<String, List<Book>> bookLoader = dfe.getDataLoader(BookLoader.class);
         Student student = dfe.getSource();
-        return studentBookRegister.get(student.getId());
+        return bookLoader.load(student.getId());
     }
 }
