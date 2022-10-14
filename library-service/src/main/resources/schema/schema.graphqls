@@ -3,6 +3,10 @@ type Student @key(fields: "id") @extends {
     books: [Book]
 }
 
+type Subscription {
+    ticker: String
+}
+
 type Book {
     id: ID
     title: String
