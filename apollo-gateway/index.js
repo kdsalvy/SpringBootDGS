@@ -1,4 +1,4 @@
-const {ApolloServer, gql} = require('apollo-server');
+const {ApolloServer} = require('apollo-server');
 const {ApolloGateway, IntrospectAndCompose} = require('@apollo/gateway')
 
 const gateway = new ApolloGateway({
@@ -12,4 +12,7 @@ const gateway = new ApolloGateway({
 
 const server = new ApolloServer({gateway, subscriptions: false, tracing: true});
 // default port is 4000
-server.listen();
+server.listen(4000).then(r => {
+    console.log("Server started at")
+    console.log(r.url)
+});
